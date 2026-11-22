@@ -31,13 +31,3 @@ fetch("data.json?"+Date.now()).then(function(r){return r.json()}).then(function(
  $("up").textContent="آخرین به‌روزرسانی: "+T(d.updated)+" · بیت‌کوین: $"+d.btc_last.toLocaleString("en-US");
  var o='<option value="">همه‌ی خبرهای دسته‌بندی‌شده</option>';for(var c in d.cats)o+='<option value="'+c+'">'+d.cats[c].label+'</option>';
  $("f").innerHTML=o;$("f").onchange=R;R()}).catch(function(){$("up").textContent="داده‌ای نیست. اسکریپت radar.py را یک بار اجرا کنید."});
-function R(){var f=$("f").value,h="";D.news.filter(function(n){return f?n.c===f:n.c}).slice(0,80).forEach(function(n){var i=D.news.indexOf(n);
- h+='<tr><td class="m">'+T(n.z)+'</td><td>'+E(n.s)+' <a href="'+n.u+'" target="_blank" rel="noopener">↗</a></td><td><span class="l" data-a="'+i+'" data-m="s">'+E(n.ti)+'</span><div class="m">'+D.cats[n.c].label+'</div></td><td><span class="l" data-a="'+i+'" data-m="a">تحلیل ←</span></td></tr>'});
- $("r").innerHTML=h||'<tr><td colspan="4" class="m">خبری نیست.</td></tr>'}
-function O(h){s.innerHTML='<button class="x" data-x>بستن</button>'+h;p.classList.add("on")}
-function EV(ev){return ev.map(function(e){return '<div class="e"><div>'+E(e.t)+'<div class="m">'+e.d+'</div></div><div><span class="'+C(e.r1)+'">'+F(e.r1)+'</span> · <span class="'+C(e.r7||0)+'">'+F(e.r7)+'</span><div class="m">همان روز · ۷ روز</div></div></div>'}).join("")}
-function V(i,m){var n=D.news[i],c=D.cats[n.c],t=c.stats;
- if(m==="s")return O('<h2>اخبار مشابه از ۲۰۱۴</h2><div class="m">'+E(n.ti)+'</div>'+EV(c.events)+'<p><span class="l" data-a="'+i+'" data-m="a">تحلیل ←</span></p>');
- O('<h2>تحلیل نسبت به گذشته</h2><div class="m">'+E(n.ti)+' — دسته: '+c.label+'</div>'+(t?'<div class="k"><div><span class="m">موارد مشابه</span><b>'+t.n+'</b></div><div><span class="m">مثبت در روز رویداد</span><b>'+t.up1+'٪</b></div><div><span class="m">میانگین روز رویداد</span><b class="'+C(t.m1)+'">'+F(t.m1)+'</b></div><div><span class="m">میانگین ۷ روزه</span><b class="'+C(t.m7||0)+'">'+F(t.m7)+'</b></div></div><div><b>بازه‌ی محتمل (چارک ۲۵ تا ۷۵):</b> '+F(t.q25)+' تا '+F(t.q75)+'</div><div class="m">نمونه‌ی '+t.n+' موردی کوچک است؛ این بازه‌ی تاریخی است نه پیش‌بینی. عوامل روز (نرخ بهره، دلار، نفت، ریسک‌پذیری) را جدا بررسی کنید.</div>':'<p>داده‌ای نیست.</p>')+'<h3>رویدادهای مبنا</h3>'+EV(c.events))}
-document.addEventListener("click",function(e){var t=e.target;if(t.dataset.a)V(+t.dataset.a,t.dataset.m);else if(t.hasAttribute("data-x")||t===p)p.classList.remove("on")});
-</script></body></html>
